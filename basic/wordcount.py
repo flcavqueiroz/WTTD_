@@ -57,7 +57,7 @@ def fill_dict(words, words_dict):
 
 def print_words(filename):
     words_dict = {}
-    words = split_by_words(filename)
+    words = split_by_word(filename)
     fill_dict(words, words_dict)
 
     for key in sorted(words_dict):
@@ -65,7 +65,7 @@ def print_words(filename):
 
 def print_top(filename):
     words_dict = {}
-    words = split_by_words(filename)
+    words = split_by_word(filename)
     fill_dict(words, words_dict)
 
     reverse_sorted_top20 = sorted(words_dict.items(), key=operator.itemgetter(1), reverse=True)
