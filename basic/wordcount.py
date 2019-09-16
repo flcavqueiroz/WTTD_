@@ -38,9 +38,47 @@ print_words() and print_top().
 """
 
 import sys
+import operator
+import collections
 
 
-# +++your code here+++
+def split_by_word(filename):
+    file = open(filename, 'r')
+    words = file.read().split()
+    return words
+
+def fill_dict(words, words_dict):
+    for w in words:
+        if w.lower() in words_dict.keys():
+            value = words_dict[w.lower()]
+            words_dict[w.lower()] = value + 1
+        else:
+            words_dict[w.lower()] = 1
+
+def print_words(filename):
+    words_dict = {}
+    words = split_by_words(filename)
+    fill_dict(words, words_dict)
+
+    for key in sorted(words_dict):
+        print("%s: %s" % (key, words_dict[key]))
+
+def print_top(filename):
+    words_dict = {}
+    words = split_by_words(filename)
+    fill_dict(words, words_dict)
+
+    reverse_sorted_top20 = sorted(words_dict.items(), key=operator.itemgetter(1), reverse=True)
+    length = 0
+    if(len(reverse_sorted_top20) > 20):
+        length = 20
+    else:
+        length = len(reverse_sorted_top20)
+
+    for i in range(length):
+        print(reverse_sorted_top20[i])    
+
+
 # Define print_words(filename) and print_top(filename) functions.
 # You could write a helper utility function that reads a file
 # and builds and returns a word/count dict for it.
